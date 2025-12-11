@@ -19,7 +19,7 @@ jobs:
       - name: Create output folder
         run: mkdir -p zap-output && chmod 777 zap-output
 
-      - name: Run ZAP API Scan (executes POSTs from OpenAPI)
+      - name: Run ZAP API Scan (executes POSTs via OpenAPI)
         run: |
           docker run --rm \
             -v "$(pwd)":/zap/wrk \
@@ -29,7 +29,7 @@ jobs:
               -f openapi \
               -r /zap/wrk/zap-output/zap-report.html \
               -J /zap/wrk/zap-output/zap-report.json \
-              -z "-config api.dump_results=true" \
+              -I \
               -d
 
       - name: Upload HTML Report
